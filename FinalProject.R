@@ -65,25 +65,11 @@ ggplot(data = HBsum) +
   geom_point(mapping = aes(x = winter, y = sdave)) +
   labs(x = "Date", y = "Variation in Average Daily Temp")
 
-# plotting variation in minimum daily temp over each winter
-ggplot(data = HBsum, mapping = aes(x = winter, y = sdmin)) + 
-  geom_point() +
-  geom_smooth(method=lm)+
-  labs(x = "Date", y = "Variation in Minimum Daily Temp")+
-  theme_bw()
-
-#The format for the lm() function is y-variable ~ x-variable
+# linear regression of standard deviation of average daily temp over each winter ~ year
 lm1 <- lm(sdmin ~ winter, data=HBsum)
 summary(lm1)
 
-# plotting variation in max daily temp over each winter
-ggplot(data = HBsum, mapping = aes(x = winter, y = sdmax)) + 
-  geom_point() +
-  geom_smooth(method=lm)
-
-lm3 <- lm(sdave ~ winter, data=HBsum)
-summary(lm3)
-  
+# Figure 1
 # plot the winter average daily minimum temp by year  
 ggplot(data = HBsum, mapping = aes(x = winter, y = minmean)) + 
   geom_point()+
@@ -91,9 +77,33 @@ ggplot(data = HBsum, mapping = aes(x = winter, y = minmean)) +
   labs(x = "Date", y = "Average Minimum Temp (C)") +
   theme_bw()
 
-lm1 <- lm(minmean ~ winter, data=HBsum)
-summary(lm1)
+# linear regression of average minimum daily temp each winter ~ year
+lm2 <- lm(minmean ~ winter, data=HBsum)
+summary(lm2)
 
+#Figure 2
+# plotting variation in minimum daily temp over each winter
+ggplot(data = HBsum, mapping = aes(x = winter, y = sdmin)) + 
+  geom_point() +
+  geom_smooth(method=lm)+
+  labs(x = "Date", y = "Variation in Minimum Daily Temp")+
+  theme_bw()
+
+# linear regression of standard deviation of minimum daily temp each winter ~ year
+lm3 <- lm(sdmin ~ winter, data=HBsum)
+summary(lm3)
+
+# plotting variation in max daily temp over each winter
+ggplot(data = HBsum, mapping = aes(x = winter, y = sdmax)) + 
+  geom_point() +
+  geom_smooth(method=lm)
+
+# linear regression of standard deviation of maximum daily temp each winter ~ year
+lm4 <- lm(sdmax ~ winter, data=HBsum)
+summary(lm4)
+
+
+# Figure 3
 # plot the number of days below freezing (0 degrees Celsius) each winter
 ggplot(data = cold, mapping = aes(x = winter, y=below)) + 
   geom_point()+
@@ -101,7 +111,8 @@ ggplot(data = cold, mapping = aes(x = winter, y=below)) +
   labs(x = "Date", y = "# of Below Freezing Days") +
   theme_bw()
 
-lm2 <- lm(below ~ winter, data=cold)
-summary(lm2)
-summary(HB_temp)
+# linear regression of number of days below freezing each winter ~ year
+lm5 <- lm(below ~ winter, data=cold)
+summary(lm5)
+
 
