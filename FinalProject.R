@@ -2,11 +2,12 @@
 # December 9, 2020
 # BISC/ES 307 Final Project
 
-# Comparing winter climate data btwn Harvard Forest and Hubbard Brook
+# Looking at trends in winter temperature data at Hubbard Brook Experimental Forest
 
 # load libraries
 library(tidyverse)
 library(lubridate)
+library(lme4)
 
 
 # set working directory
@@ -101,7 +102,6 @@ ggplot(data = HBsum, mapping = aes(x = winter, y = sdmax)) +
 # linear regression of standard deviation of maximum daily temp each winter ~ year
 lm4 <- lm(sdmax ~ winter, data=HBsum)
 summary(lm4)
-
 
 # Figure 3
 # plot the number of days below freezing (0 degrees Celsius) each winter
